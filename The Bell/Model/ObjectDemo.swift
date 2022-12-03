@@ -9,7 +9,6 @@ import Foundation
 
 class ObjectDemo: Encodable, Decodable {
     
-   // var id: String = ""
     var date_created: String = ""
     var date_created_formatted: String = ""
     var is_photo: Bool = true

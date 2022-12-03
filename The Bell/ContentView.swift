@@ -60,7 +60,7 @@ struct ContentView: View {
         }
       
         //loads background image for buttons to sit on and repositions it
-        Image("IMG_0910").renderingMode(.original).resizable(resizingMode: .stretch).frame(width: 385, height: 395).offset(x: 0, y: -465)
+        Image("IMG_0910").renderingMode(.original).resizable(resizingMode: .stretch).frame(width: 385, height: 395).offset(x: 0, y: -460)
         
         //loads background image for buttons to sit on and repositions it
         Image("IMG_0908").renderingMode(.original).resizable(resizingMode: .stretch).frame(width: 385, height: 395).offset(x: 0, y: 130)
@@ -146,10 +146,18 @@ struct photoView: View {
     
     VStack{
       
-      if viewModel.object != nil {
+      if !viewModel.listObject.isEmpty {
         VStack{
           
-          Text(viewModel.object!.date_created)
+          //ForEach(viewModel.listObject){ object in
+            
+            //Text(object.date_created)
+            //Text(object.date_created_formatted)
+            //Text(object.path)
+            
+          //}
+          
+         /* Text(viewModel.object!.date_created)
             .padding()
           
           Text(viewModel.object!.date_created_formatted)
@@ -165,17 +173,26 @@ struct photoView: View {
           }
           
           Text(viewModel.object!.path)
-            .padding()
+            .padding() */
           
         }
         
         
       }
       else {
+        
         Text("EMPTY PHOTOS")
         
+        Button {
+          viewModel.readAllPhotos()
+        } label: {
+          Text("Refresh")
+            .padding()
+        }
+        
       }
-    }.onAppear(perform: viewModel.readObject)
+      
+    }//.onAppear(perform: viewModel.readAllPhotos)
     
   }
 }
@@ -187,13 +204,14 @@ struct clipsView: View {
   @StateObject var viewModel = ReadViewModel()
   
   var body: some View{
-    
-    VStack{
       
       if viewModel.object != nil {
         VStack{
           
           Text(viewModel.object!.date_created)
+            .padding()
+          
+          /*Text(viewModel.object!.date_created)
             .padding()
           
           Text(viewModel.object!.date_created_formatted)
@@ -210,7 +228,7 @@ struct clipsView: View {
           
           Text(viewModel.object!.path)
             .padding()
-          
+          */
         }
         
         
@@ -218,8 +236,14 @@ struct clipsView: View {
       else {
         Text("EMPTY CLIPS")
         
+        Button {
+          viewModel.readAllClips()
+        } label: {
+          Text("Refresh")
+            .padding()
+        }
+      
       }
-    }.onAppear(perform: viewModel.readObject)
     
   }
 }
