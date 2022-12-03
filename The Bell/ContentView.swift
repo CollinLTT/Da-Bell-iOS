@@ -59,6 +59,8 @@ struct ContentView: View {
           
         }
       
+        //loads background image for buttons to sit on and repositions it
+        Image("IMG_0910").renderingMode(.original).resizable(resizingMode: .stretch).frame(width: 385, height: 395).offset(x: 0, y: -465)
         
         //loads background image for buttons to sit on and repositions it
         Image("IMG_0908").renderingMode(.original).resizable(resizingMode: .stretch).frame(width: 385, height: 395).offset(x: 0, y: 130)
@@ -180,8 +182,6 @@ struct photoView: View {
 
 //Used for viewing clips from firebase
 struct clipsView: View {
-  
-  //Test comment for github
   
   //Reference to ReadViewModel.swift
   @StateObject var viewModel = ReadViewModel()
