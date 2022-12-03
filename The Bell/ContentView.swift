@@ -20,7 +20,7 @@ import Foundation
 
 //The home page view
 struct ContentView: View {
-    
+  
   //Reference to ReadViewModel.swift
   @StateObject var viewModel = ReadViewModel()
 
@@ -180,6 +180,8 @@ struct photoView: View {
 
 //Used for viewing clips from firebase
 struct clipsView: View {
+  
+  //Test comment for github
   
   //Reference to ReadViewModel.swift
   @StateObject var viewModel = ReadViewModel()
