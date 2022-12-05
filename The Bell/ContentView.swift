@@ -99,7 +99,7 @@ struct ContentView: View {
           .foregroundColor(.white)
           .cornerRadius(20)*/
           .offset(x: -50, y: -160)
-          .font(.title)
+          .font(.largeTitle)
           .bold()
         
         //Decorative home button that just prints to console when pressed
@@ -143,16 +143,28 @@ struct ContentView: View {
 //Used for viewing photos from firebase
 struct photoView: View {
   
+  //Reference to ReadViewModel.swift
+  @StateObject var viewModel = ReadViewModel()
+  
+  let posts = ["bed.double.fill", "tram.fill", "house.fill",
+               "eraser.fill", "trash.fill", "folder.fill",
+               "alarm.fill", "clock.fill", "tv.fill",
+               "paperplane.fill", "archivebox.fill", "doc.fill"]
+  
+  //Adjusts the presentation mode for custom navigation button
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
+  //View to display customizable back button
       var btnBack : some View { Button(action: {
           self.presentationMode.wrappedValue.dismiss()
           }) {
               HStack {
+                //back arrow
                 Image(systemName: "arrowshape.left.fill") // set image here
                   .aspectRatio(contentMode: .fit)
                   .foregroundColor(.black)
                 
+                //text next to back arrow
                   Text("Home")
                   .foregroundColor(.cyan)
                   .font(.title2)
@@ -162,30 +174,19 @@ struct photoView: View {
           }
       }
   
-  //Reference to ReadViewModel.swift
-  @StateObject var viewModel = ReadViewModel()
-  
-  let posts = ["bed.double.fill", "tram.fill", "house.fill",
-               "eraser.fill", "trash.fill", "folder.fill",
-               "alarm.fill", "clock.fill", "tv.fill",
-               "paperplane.fill", "archivebox.fill", "doc.fill"]
   
   var body: some View{
     
     VStack(alignment: .leading){
       
-      //formats the "Your Camera" text
+      //formats the "Photos" text
       Text("Photos")
         .foregroundColor(.black)
         .padding(.horizontal)
-        /* Adds white background with rounded corners (a bubble) around the text
-        .background(Color(hue: 0.5, saturation: 0.005, brightness: 1.0))
-        .foregroundColor(.white)
-        .cornerRadius(20)*/
-        //.offset(x: -50, y: -160)
         .font(.largeTitle)
         .bold()
       
+      //Formats the photos in a 3 image wide grid with a spacing of 40 between each
       GeometryReader { geo in
         ScrollView{
           LazyVGrid(columns: [
@@ -193,6 +194,7 @@ struct photoView: View {
             GridItem(.flexible()),
             GridItem(.flexible())
           ], spacing: 40){
+            //For each element in "posts" displays an image with custom sizing
             ForEach(posts, id: \.self){ post in
               Image(systemName: post)
                 .frame(width: geo.size.width/3.5, height: geo.size.width/3.5)
@@ -206,8 +208,9 @@ struct photoView: View {
       }
         
     }
+    //hides the system default back button replaces with custom btnBack
     .navigationBarBackButtonHidden(true)
-            .navigationBarItems(leading: btnBack)  }
+    .navigationBarItems(leading: btnBack)  }
 }
 
 //Used for viewing clips from firebase
@@ -220,19 +223,37 @@ struct clipsView: View {
                "clip4", "clip5", "clip6",
                "clip7", "clip8", "clip9"]
   
+  //Adjusts the presentation mode for custom navigation button
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+  //View to display customizable back button
+      var btnBack : some View { Button(action: {
+          self.presentationMode.wrappedValue.dismiss()
+          }) {
+              HStack {
+                //back arrow
+                Image(systemName: "arrowshape.left.fill") // set image here
+                  .aspectRatio(contentMode: .fit)
+                  .foregroundColor(.black)
+                
+                //text next to back arrow
+                  Text("Home")
+                  .foregroundColor(.cyan)
+                  .font(.title2)
+                
+                
+              }
+          }
+      }
+  
   var body: some View{
       
     VStack(alignment: .leading){
       
-      //formats the "Your Camera" text
+      //formats the "ShortClips" text
       Text("ShortClips")
         .foregroundColor(.black)
         .padding(.horizontal)
-        /* Adds white background with rounded corners (a bubble) around the text
-        .background(Color(hue: 0.5, saturation: 0.005, brightness: 1.0))
-        .foregroundColor(.white)
-        .cornerRadius(20)*/
-        //.offset(x: -50, y: -160)
         .font(.largeTitle)
         .bold()
       
@@ -256,8 +277,11 @@ struct clipsView: View {
       }
         
     }
-    
+    //hides the system default back button replaces with custom btnBack
+    .navigationBarBackButtonHidden(true)
+    .navigationBarItems(leading: btnBack)
   }
+  
 }
 
 //structures the webview and updates the UI view
