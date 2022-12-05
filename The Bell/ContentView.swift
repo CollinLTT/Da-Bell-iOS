@@ -17,6 +17,7 @@ import SwiftUI
 import WebKit
 import FirebaseDatabase
 import Foundation
+import PhotosUI
 
 //The home page view
 struct ContentView: View {
@@ -41,7 +42,8 @@ struct ContentView: View {
       ZStack(){
         
         //Sets the background color and ignores format safe zones
-        Color(.sRGB, red: 0.674, green: 0.946, blue: 0.953)
+        //Color(.sRGB, red: 0.674, green: 0.946, blue: 0.953)
+        Color(.white)
           .ignoresSafeArea()
         
         
@@ -49,7 +51,7 @@ struct ContentView: View {
         if viewModel.value != nil {
           
           //loads the webview with database weblink and formats its position, size, and shadow
-          WebView(url: URL(string: viewModel.value!)!).frame(width: 300, height: 260.0).cornerRadius(20).shadow(color: .black.opacity(0.35),radius: 6.0, x: 0, y: 5)
+          WebView(url: URL(string: viewModel.value!)!).frame(width: 300, height: 260.0).cornerRadius(20).shadow(color: .black.opacity(0.25),radius: 4.0, x: 0, y: 8)
           
         }
         else {
@@ -126,10 +128,12 @@ struct ContentView: View {
             .tint(.white)
         }.offset(x: -140, y: 285)
         
+        
       }
       
       //runs the readValue function on view launch to retrieve firebase data
     }.onAppear(perform: viewModel.readValue)
+      .navigationBarTitle("Title")
     
   }
 
@@ -139,62 +143,71 @@ struct ContentView: View {
 //Used for viewing photos from firebase
 struct photoView: View {
   
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+      var btnBack : some View { Button(action: {
+          self.presentationMode.wrappedValue.dismiss()
+          }) {
+              HStack {
+                Image(systemName: "arrowshape.left.fill") // set image here
+                  .aspectRatio(contentMode: .fit)
+                  .foregroundColor(.black)
+                
+                  Text("Home")
+                  .foregroundColor(.cyan)
+                  .font(.title2)
+                
+                
+              }
+          }
+      }
+  
   //Reference to ReadViewModel.swift
   @StateObject var viewModel = ReadViewModel()
   
+  let posts = ["bed.double.fill", "tram.fill", "house.fill",
+               "eraser.fill", "trash.fill", "folder.fill",
+               "alarm.fill", "clock.fill", "tv.fill",
+               "paperplane.fill", "archivebox.fill", "doc.fill"]
+  
   var body: some View{
     
-    VStack{
+    VStack(alignment: .leading){
       
-      if !viewModel.listObject.isEmpty {
-        VStack{
-          
-          //ForEach(viewModel.listObject){ object in
-            
-            //Text(object.date_created)
-            //Text(object.date_created_formatted)
-            //Text(object.path)
-            
-          //}
-          
-         /* Text(viewModel.object!.date_created)
-            .padding()
-          
-          Text(viewModel.object!.date_created_formatted)
-            .padding()
-          
-          if viewModel.object!.is_photo{
-            Text("true")
-              .padding()
-          }
-          else{
-            Text("false")
-              .padding()
-          }
-          
-          Text(viewModel.object!.path)
-            .padding() */
-          
-        }
-        
-        
-      }
-      else {
-        
-        Text("EMPTY PHOTOS")
-        
-        Button {
-          viewModel.readAllPhotos()
-        } label: {
-          Text("Refresh")
-            .padding()
-        }
-        
-      }
+      //formats the "Your Camera" text
+      Text("Photos")
+        .foregroundColor(.black)
+        .padding(.horizontal)
+        /* Adds white background with rounded corners (a bubble) around the text
+        .background(Color(hue: 0.5, saturation: 0.005, brightness: 1.0))
+        .foregroundColor(.white)
+        .cornerRadius(20)*/
+        //.offset(x: -50, y: -160)
+        .font(.largeTitle)
+        .bold()
       
-    }//.onAppear(perform: viewModel.readAllPhotos)
-    
-  }
+      GeometryReader { geo in
+        ScrollView{
+          LazyVGrid(columns: [
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible())
+          ], spacing: 40){
+            ForEach(posts, id: \.self){ post in
+              Image(systemName: post)
+                .frame(width: geo.size.width/3.5, height: geo.size.width/3.5)
+                .background(Color(hue: 1.0, saturation: 0.0, brightness: 0.941))
+                .cornerRadius(15)
+                .shadow(color: .black.opacity(0.15),radius: 2.0, x: 0, y: 6)
+                
+            }
+          }
+        }
+      }
+        
+    }
+    .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: btnBack)  }
 }
 
 //Used for viewing clips from firebase
@@ -203,47 +216,46 @@ struct clipsView: View {
   //Reference to ReadViewModel.swift
   @StateObject var viewModel = ReadViewModel()
   
+  let posts = ["clip1", "clip2", "clip3",
+               "clip4", "clip5", "clip6",
+               "clip7", "clip8", "clip9"]
+  
   var body: some View{
       
-      if viewModel.object != nil {
-        VStack{
-          
-          Text(viewModel.object!.date_created)
-            .padding()
-          
-          /*Text(viewModel.object!.date_created)
-            .padding()
-          
-          Text(viewModel.object!.date_created_formatted)
-            .padding()
-          
-          if viewModel.object!.is_photo{
-            Text("true")
-              .padding()
-          }
-          else{
-            Text("false")
-              .padding()
-          }
-          
-          Text(viewModel.object!.path)
-            .padding()
-          */
-        }
-        
-        
-      }
-      else {
-        Text("EMPTY CLIPS")
-        
-        Button {
-          viewModel.readAllClips()
-        } label: {
-          Text("Refresh")
-            .padding()
-        }
+    VStack(alignment: .leading){
       
+      //formats the "Your Camera" text
+      Text("ShortClips")
+        .foregroundColor(.black)
+        .padding(.horizontal)
+        /* Adds white background with rounded corners (a bubble) around the text
+        .background(Color(hue: 0.5, saturation: 0.005, brightness: 1.0))
+        .foregroundColor(.white)
+        .cornerRadius(20)*/
+        //.offset(x: -50, y: -160)
+        .font(.largeTitle)
+        .bold()
+      
+      GeometryReader { geo in
+        ScrollView{
+          LazyVGrid(columns: [
+            GridItem(.flexible()),
+          ], spacing: 20){
+            ForEach(posts, id: \.self){ post in
+              Text(post)
+                .font(.title2)
+                .foregroundColor(Color.black)
+                .frame(width: geo.size.width/1, height: geo.size.width/5)
+                .background(Color(hue: 1.0, saturation: 0.0, brightness: 0.941))
+                .cornerRadius(15)
+                .shadow(color: .black.opacity(0.15),radius: 3.0, x: 0, y: 5)
+                
+            }
+          }
+        }
       }
+        
+    }
     
   }
 }
