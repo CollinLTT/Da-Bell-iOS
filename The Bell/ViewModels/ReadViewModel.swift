@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseDatabase
 import FirebaseDatabaseSwift
 
@@ -29,8 +30,9 @@ class ReadViewModel: ObservableObject {
     @Published
     var listObject = [ObjectDemo]()
     
-    //@Published
-   // var photosArray = [String]
+    @Published
+    var photosArray = [ObjectDemo]()
+    
     
     func readValue() {
         
@@ -50,7 +52,7 @@ class ReadViewModel: ObservableObject {
     
     func readAllPhotos() {
         
-        ref.child("photos").observeSingleEvent(of: .value) { snapshot in
+        ref.child("photos").observeSingleEvent(of: DataEventType.value) { snapshot  in
             
             for case let child as DataSnapshot in snapshot.children {
                 
@@ -60,16 +62,27 @@ class ReadViewModel: ObservableObject {
                     return
                 }
                 
-                let date_created = dict["date_created"] as Any
-                let date_created_formatted = dict["date_created_formatted"] as Any
-                let is_photo = dict["is_photo"] as Any
-                let path = dict["path"] as Any
+                let date_created1 = dict["date_created"] as Any
+                let date_created_formatted1 = dict["date_created_formatted"] as Any
+                let is_photo1 = dict["is_photo"] as Any
+                let path1 = dict["path"] as Any
                 
-                print(date_created)
-                print(date_created_formatted)
-                print(is_photo)
-                print(path)
+                /*if date_created1 != nil { self.photosArray.append(ObjectDemo(date_created: dict["date_created"],
+                                                                date_created_formatted: dict["date_created_formatted"],
+                                                                is_photo: dict["is_photo"],
+                                                                path: dict["path"])) }*/
+            
+                /*self.photosArray.append(ObjectDemo(date_created: date_created1,
+                                              date_created_formatted: date_created_formatted1,
+                                              is_photo: is_photo1,
+                                              path: path1))*/
+                
+                print(date_created1)
+                print(date_created_formatted1)
+                print(is_photo1)
+                print(path1)
             }
+            
         }
         
     }
@@ -100,7 +113,7 @@ class ReadViewModel: ObservableObject {
         
     }
     
-    func readObject() {
+    /*func readObject() {
         
         ref.child("photos") //-NH0bW4UivgzSIta7amD
             .observe(DataEventType.value) { snapshot in
@@ -125,5 +138,6 @@ class ReadViewModel: ObservableObject {
             })
         }
     }
+     */
     
 }
