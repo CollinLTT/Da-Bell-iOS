@@ -29,6 +29,9 @@ class ReadViewModel: ObservableObject {
     @Published
     var listObject = [ObjectDemo]()
     
+    //@Published
+   // var photosArray = [String]
+    
     func readValue() {
         
         ref.child("link/link").observeSingleEvent(of: DataEventType.value) { snapshot in

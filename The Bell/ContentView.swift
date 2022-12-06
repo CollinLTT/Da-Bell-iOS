@@ -104,7 +104,10 @@ struct ContentView: View {
         
         //Decorative home button that just prints to console when pressed
         Button {
+          //Refreshes the link from Firebase
+          viewModel.readValue()
           print("Pressed Home")
+          
         }
           label: {Image (systemName: "house.fill")}
             .offset(y: 290)
@@ -132,8 +135,8 @@ struct ContentView: View {
       }
       
       //runs the readValue function on view launch to retrieve firebase data
-    }.onAppear(perform: viewModel.readValue)
-      .navigationBarTitle("Title")
+    }.onAppear(perform: viewModel.observeDataChange)
+      .navigationBarTitle("Home")
     
   }
 
@@ -251,7 +254,7 @@ struct clipsView: View {
     VStack(alignment: .leading){
       
       //formats the "ShortClips" text
-      Text("ShortClips")
+      Text("Short Clips")
         .foregroundColor(.black)
         .padding(.horizontal)
         .font(.largeTitle)
@@ -263,7 +266,10 @@ struct clipsView: View {
             GridItem(.flexible()),
           ], spacing: 20){
             ForEach(posts, id: \.self){ post in
-              Text(post)
+              
+              NavigationLink(destination: videoPlayer()) {
+                  Text(post)
+              }
                 .font(.title2)
                 .foregroundColor(Color.black)
                 .frame(width: geo.size.width/1, height: geo.size.width/5)
@@ -282,6 +288,81 @@ struct clipsView: View {
     .navigationBarItems(leading: btnBack)
   }
   
+}
+
+struct videoPlayer: View{
+  
+  //Reference to ReadViewModel.swift
+  @StateObject var viewModel = ReadViewModel()
+  
+  //Adjusts the presentation mode for custom navigation button
+  @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+  //View to display customizable back button
+      var btnBack : some View { Button(action: {
+          self.presentationMode.wrappedValue.dismiss()
+          }) {
+              HStack {
+                //back arrow
+                Image(systemName: "arrowshape.left.fill") // set image here
+                  .aspectRatio(contentMode: .fit)
+                  .foregroundColor(.black)
+                
+                //text next to back arrow
+                  Text("Short Clips")
+                  .foregroundColor(.cyan)
+                  .font(.title2)
+                
+                
+              }
+          }
+      }
+  
+  var body: some View{
+      
+    VStack(alignment: .leading){
+      
+      //formats the "ShortClips" text
+      Text("Video Player")
+        .foregroundColor(.black)
+        .font(.largeTitle)
+        .bold()
+        .offset(x: -20, y: -80)
+      
+      Text("Date:")
+        .foregroundColor(.black)
+        .padding(.horizontal)
+        .font(.title)
+        .bold()
+        .offset(x: -10, y: -40)
+        //.underline()
+      
+      Image(systemName: "video.fill")
+        .frame(width: 300, height: 300)
+        .background(Color(hue: 1.0, saturation: 0.0, brightness: 0.941))
+        .cornerRadius(15)
+        .shadow(color: .black.opacity(0.15),radius: 2.0, x: 0, y: 6)
+        .offset(x: 0, y: -40)
+      
+      Button("Play Video") {
+        print("pressed play")
+        //viewModel.readAllPhotos()
+      }
+      .foregroundColor(.black)
+        .padding(.horizontal)
+        .font(.title)
+        //.bold()
+        .background(Color(hue: 1.0, saturation: 0.0, brightness: 0.98))
+        .cornerRadius(5)
+        .shadow(color: .black.opacity(0.2),radius: 2.0, x: 0, y: 4)
+        .offset(x: 70, y: 0)
+      
+        
+    }
+    //hides the system default back button replaces with custom btnBack
+    .navigationBarBackButtonHidden(true)
+    .navigationBarItems(leading: btnBack)
+  }
 }
 
 //structures the webview and updates the UI view
