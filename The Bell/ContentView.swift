@@ -335,7 +335,6 @@ struct videoPlayer: View{
         .font(.title)
         .bold()
         .offset(x: -10, y: -40)
-        //.underline()
       
       Image(systemName: "video.fill")
         .frame(width: 300, height: 300)
@@ -346,12 +345,11 @@ struct videoPlayer: View{
       
       Button("Play Video") {
         print("pressed play")
-        //viewModel.readAllPhotos()
+        viewModel.readAllPhotos()
       }
       .foregroundColor(.black)
         .padding(.horizontal)
         .font(.title)
-        //.bold()
         .background(Color(hue: 1.0, saturation: 0.0, brightness: 0.98))
         .cornerRadius(5)
         .shadow(color: .black.opacity(0.2),radius: 2.0, x: 0, y: 4)
