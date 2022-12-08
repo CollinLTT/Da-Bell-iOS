@@ -16,8 +16,16 @@
 import SwiftUI
 import WebKit
 import FirebaseDatabase
+import FirebaseStorage
 import Foundation
 import PhotosUI
+import SafariServices
+
+var safariLink = "https://www.picsum.photos"
+let storage = Storage.storage()
+
+// Create a storage reference from our storage service
+let storageRef = storage.reference()
 
 //The home page view
 struct ContentView: View {
@@ -29,7 +37,6 @@ struct ContentView: View {
   @State private var showWebView = false
   private let urlString: String = "https://www.picsum.photos"
   
-    
   //sets the camera display name
   var camViewName = "Front Door Cam"
   
@@ -46,21 +53,17 @@ struct ContentView: View {
         Color(.white)
           .ignoresSafeArea()
         
+        //Webview background lookalike
+        Image(systemName: "")
+          .foregroundColor(Color(hue: 0.0, saturation: 0.0, brightness: 0.9))
+          .font(.largeTitle)
+          .frame(width: 300, height: 270)
+          //.background(Color(hue: 0.0, saturation: 0.0, brightness: 0.9))
+          .background(Gradient(colors: [.blue,.orange]))
+          .cornerRadius(15)
+          .shadow(color: .black.opacity(0.25),radius: 2.0, x: 0, y: 6)
+          .offset(x: 0, y: 0)
         
-        //checks if a string was grabbed from the firebase database
-        if viewModel.value != nil {
-          
-          //loads the webview with database weblink and formats its position, size, and shadow
-          WebView(url: URL(string: viewModel.value!)!).frame(width: 300, height: 260.0).cornerRadius(20).shadow(color: .black.opacity(0.25),radius: 4.0, x: 0, y: 8)
-          
-        }
-        else {
-          
-          //loads the webview using default link and formats its position, size, and shadow
-          WebView(url: URL(string: urlString)!).frame(width: 300, height: 260.0).cornerRadius(20).shadow(color: .black.opacity(0.35),radius: 6.0, x: 0, y: 5)
-          
-        }
-      
         //loads background image for buttons to sit on and repositions it
         Image("IMG_0910").renderingMode(.original).resizable(resizingMode: .stretch).frame(width: 385, height: 395).offset(x: 0, y: -460)
         
@@ -102,35 +105,75 @@ struct ContentView: View {
           .font(.largeTitle)
           .bold()
         
-        //Decorative home button that just prints to console when pressed
-        Button {
-          //Refreshes the link from Firebase
-          viewModel.readValue()
-          print("Pressed Home")
+        
+        //Group of navigation buttons
+        Group {
           
-        }
-          label: {Image (systemName: "house.fill")}
+          //checks if a string was grabbed from the firebase database
+          if viewModel.value != nil {
+            
+            //loads the webview with database weblink and formats its position, size, and shadow
+            /*WebView(url: URL(string: viewModel.value!)!).frame(width: 300, height: 260.0).cornerRadius(20).shadow(color: .black.opacity(0.25),radius: 4.0, x: 0, y: 8)*/
+            
+            /*NavigationLink(destination: safariView()) {
+              Button{ viewModel.readValue()} label: {Image (systemName: "play.circle")}
+                .font(.largeTitle)
+                .tint(.white)
+            }*/
+            
+            NavigationLink(destination: safariView()) {
+              Label("", systemImage: "play.circle")
+                .font(.largeTitle)
+                .tint(.white)
+              
+            }
+
+          }
+          else {
+            
+            //loads the webview using default link and formats its position, size, and shadow
+            /*WebView(url: URL(string: urlString)!).frame(width: 300, height: 260.0).cornerRadius(20).shadow(color: .black.opacity(0.35),radius: 6.0, x: 0, y: 5)*/
+            
+            NavigationLink(destination: safariView()) {
+              Label("", systemImage: "play.circle")
+                .font(.largeTitle)
+                .tint(.gray)
+              
+            }
+            
+          }
+          
+          //Decorative home button that just prints to console when pressed
+          Button {
+            //Refreshes the link from Firebase
+            viewModel.readValue()
+            safariLink = viewModel.value!
+            print("Pressed Home")
+            
+          }
+            label: {Image (systemName: "house.fill")}
             .offset(y: 290)
             .font(.largeTitle)
             .bold()
             .tint(.white)
-        
-        //Clips/recordings button that links to the clipsView
-        NavigationLink(destination: clipsView()) {
-          Label("", systemImage: "film.stack")
-            .font(.largeTitle)
-            .bold()
-            .tint(.white)
-        }.offset(x: 140, y: 285)
-        
-        //Photos button that links to the photoView
-        NavigationLink(destination: photoView()) {
-          Label("", systemImage: "photo.on.rectangle")
-            .font(.largeTitle)
-            .bold()
-            .tint(.white)
-        }.offset(x: -140, y: 285)
-        
+          
+          //Clips/recordings button that links to the clipsView
+          NavigationLink(destination: clipsView()) {
+            Label("", systemImage: "film.stack")
+              .font(.largeTitle)
+              .bold()
+              .tint(.white)
+          }.offset(x: 140, y: 285)
+          
+          //Photos button that links to the photoView
+          NavigationLink(destination: photoView()) {
+            Label("", systemImage: "photo.on.rectangle")
+              .font(.largeTitle)
+              .bold()
+              .tint(.white)
+          }.offset(x: -140, y: 285)
+          
+        }
         
       }
       
@@ -143,8 +186,26 @@ struct ContentView: View {
   
 }
 
+struct safariView: UIViewControllerRepresentable {
+
+  func makeUIViewController(context: UIViewControllerRepresentableContext<safariView>) -> SFSafariViewController {
+
+    let controller = SFSafariViewController(url: URL(string: safariLink)!)
+    
+      return controller
+
+  }
+  func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<safariView>) {
+    
+  }
+  
+}
+
 //Used for viewing photos from firebase
 struct photoView: View {
+  
+  let ref = storageRef.child("photos")
+  
   
   //Reference to ReadViewModel.swift
   @StateObject var viewModel = ReadViewModel()
@@ -222,9 +283,11 @@ struct clipsView: View {
   //Reference to ReadViewModel.swift
   @StateObject var viewModel = ReadViewModel()
   
-  let posts = ["clip1", "clip2", "clip3",
-               "clip4", "clip5", "clip6",
-               "clip7", "clip8", "clip9"]
+  let posts = ["Dec 06, 2022 | 02:34 PM", "Dec 06, 2022 | 05:16 PM",
+               "Dec 06, 2022 | 05:27 PM", "Dec 07, 2022 | 12:08 PM",
+               "Dec 07, 2022 | 12:45 PM", "Dec 07, 2022 | 03:31 PM",
+               "Dec 07, 2022 | 04:02 PM", "Dec 08, 2022 | 04:23 PM",
+               "Dec 08, 2022 | 04:38 PM"]
   
   //Adjusts the presentation mode for custom navigation button
   @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -346,6 +409,7 @@ struct videoPlayer: View{
       Button("Play Video") {
         print("pressed play")
         viewModel.readAllPhotos()
+    
       }
       .foregroundColor(.black)
         .padding(.horizontal)
@@ -354,6 +418,7 @@ struct videoPlayer: View{
         .cornerRadius(5)
         .shadow(color: .black.opacity(0.2),radius: 2.0, x: 0, y: 4)
         .offset(x: 70, y: 0)
+        
       
         
     }
