@@ -34,6 +34,9 @@ class ReadViewModel: ObservableObject {
     @Published
     var photosArray = [ObjectDemo]()
     
+    @Published
+    var sillyString = [Any]()
+    
     
     func readValue() {
         
@@ -57,31 +60,22 @@ class ReadViewModel: ObservableObject {
             
             for case let child as DataSnapshot in snapshot.children {
                 
-                guard let dict = child.value as? [String:Any] else {
+                guard let dict = child.value as? [String: Any] else {
                     
                     print("Error")
                     return
                 }
                 
                 let date_created1 = dict["date_created"] as Any
-                let date_created_formatted1 = dict["date_created_formatted"] as Any
-                let is_photo1 = dict["is_photo"] as Any
-                let path1 = dict["path"] as Any
+                //let date_created_formatted1 = dict["date_created_formatted"] as Any
+                //let is_photo1 = dict["is_photo"] as Any
+                //let path1 = dict["path"] as Any
                 
-                /*if date_created1 != nil { self.photosArray.append(ObjectDemo(date_created: dict["date_created"],
-                                                                date_created_formatted: dict["date_created_formatted"],
-                                                                is_photo: dict["is_photo"],
-                                                                path: dict["path"])) }*/
-            
-                /*self.photosArray.append(ObjectDemo(date_created: date_created1,
-                                              date_created_formatted: date_created_formatted1,
-                                              is_photo: is_photo1,
-                                              path: path1))*/
-                
-                print(date_created1)
-                print(date_created_formatted1)
-                print(is_photo1)
-                print(path1)
+                self.sillyString.append(date_created1)
+                //print(date_created1)
+                //print(date_created_formatted1)
+                //print(is_photo1)
+                //print(path1)
             }
             
         }
@@ -94,7 +88,7 @@ class ReadViewModel: ObservableObject {
             
             for case let child as DataSnapshot in snapshot.children {
                 
-                guard let dict = child.value as? [String:Any] else {
+                guard let dict = child.value as? [String:String] else {
                     
                     print("Error")
                     return

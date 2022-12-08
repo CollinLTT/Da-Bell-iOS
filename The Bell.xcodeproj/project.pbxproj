@@ -31,6 +31,7 @@
 		F08ABC69293B8FB100BFD8AF /* ObjectDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08ABC68293B8FB100BFD8AF /* ObjectDemo.swift */; };
 		F08ABC6A293B8FB100BFD8AF /* ObjectDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08ABC68293B8FB100BFD8AF /* ObjectDemo.swift */; };
 		F08ABC6B293B8FB100BFD8AF /* ObjectDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08ABC68293B8FB100BFD8AF /* ObjectDemo.swift */; };
+		F0FD821029419B7500ED449B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F0FD820F29419B7500ED449B /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		F08ABC62293B808D00BFD8AF /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
 		F08ABC66293B85CC00BFD8AF /* The-Bell-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "The-Bell-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F08ABC68293B8FB100BFD8AF /* ObjectDemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDemo.swift; sourceTree = "<group>"; };
+		F0FD820D2941985500ED449B /* FirebaseUI-iOS-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "FirebaseUI-iOS-master"; path = "../../Downloads/FirebaseUI-iOS-master"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0FD821029419B7500ED449B /* SDWebImageSwiftUI in Frameworks */,
 				F08ABC60293B7BB800BFD8AF /* FirebaseDatabaseSwift in Frameworks */,
 				F08ABC3E29399B7A00BFD8AF /* FirebaseFirestoreSwift in Frameworks */,
 				F08ABC4029399B7E00BFD8AF /* FirebaseFirestore in Frameworks */,
@@ -163,6 +166,7 @@
 		F08ABC2A293994B800BFD8AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F0FD820D2941985500ED449B /* FirebaseUI-iOS-master */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,6 +209,7 @@
 				F08ABC572939C98300BFD8AF /* FirebaseStorage */,
 				F08ABC5D293B7BAE00BFD8AF /* FirebaseDatabase */,
 				F08ABC5F293B7BB800BFD8AF /* FirebaseDatabaseSwift */,
+				F0FD820F29419B7500ED449B /* SDWebImageSwiftUI */,
 			);
 			productName = "The Bell";
 			productReference = F08ABBEE293947F500BFD8AF /* The Bell.app */;
@@ -280,6 +285,7 @@
 			mainGroup = F08ABBE5293947F500BFD8AF;
 			packageReferences = (
 				F08ABC1F29398F2400BFD8AF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F0FD820E29419B7500ED449B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = F08ABBEF293947F500BFD8AF /* Products */;
 			projectDirPath = "";
@@ -673,6 +679,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		F0FD820E29419B7500ED449B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -700,6 +714,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F08ABC1F29398F2400BFD8AF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabaseSwift;
+		};
+		F0FD820F29419B7500ED449B /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0FD820E29419B7500ED449B /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
