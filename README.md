@@ -31,9 +31,9 @@ A video demonstrating the app's function and format can be seen here: [iOS App D
 
 ##### 1. Getting started with XCode
 ```shell
-# Using your device install and run XCode.
-# In XCode open an existing project and select the "The Bell" file.
-# Here you can make changes to the code.
+1. Using your device install and run XCode.
+2. In XCode open an existing project and select the "The Bell" file.
+3. Here you can make changes to the code.
 ```
 
 ##### 2. Editing the Code
@@ -43,7 +43,7 @@ A video demonstrating the app's function and format can be seen here: [iOS App D
 
 ##### 3. Updating the iOS and Device Simulator
 # To change the device and iOS version follow these steps:
-# File > Open Simulator > iOS [current version] > Select Device
+- File > Open Simulator > iOS [current version] > Select Device
 
 ##### 4. Running the App on Your Desired Device.
 ```shell
