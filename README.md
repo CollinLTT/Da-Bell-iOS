@@ -2,7 +2,7 @@
 A group project made for the class CS-578 at San Diego State University in the Fall of 2022.
 This app was formatted for the iPhone 8 running on iOS 16.1
 
-Da Bell 
+Da Bell is a custom Ring Doorbell alternative that is low in cost and provides similar functionality without audio or speaking capability. It runs using a Raspberry Pi, camera, button (doorbell), and iOS app.
 
 ### Table of Contents
 - [Main Project Page](#project-home)
