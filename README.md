@@ -44,7 +44,7 @@ A video demonstrating the app's function and format can be seen here: [iOS App D
 
 
 ##### 3. Updating the iOS and Device Simulator
-# To change the device and iOS version follow these steps:
+- To change the device and iOS version follow these steps:
 - File > Open Simulator > iOS [current version] > Select Device
 
 
