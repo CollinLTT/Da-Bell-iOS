@@ -1,6 +1,8 @@
 # Da Bell iOS Application
-A group project made for the class CS578 at San Diego State University, Fall 2022.
+A group project made for the class CS-578 at San Diego State University in the Fall of 2022.
 This app was formatted for the iPhone 8 running on iOS 16.1
+
+Da Bell 
 
 ### Table of Contents
 - [Main Project Page](#project-home)
@@ -62,4 +64,4 @@ Ideas for Improvement:
  - Remove and update any hard coded elements.
  - Make the videos in the list of videos playable and not link to a separate video player view.
  - Allow the photos to be maximized when pressed for a full and better view.
- 
+ - Change the name of the app from "The Bell" to "Da Bell" (Project name was changed half way in).
