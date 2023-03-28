@@ -7,6 +7,7 @@ Da Bell is a custom Ring Doorbell alternative that is low in cost and provides s
 ### Table of Contents
 - [Main Project Page](#project-home)
 - [Capabilities](#capabilities)
+- [Video Demo](#video-demo)
 - [Installation](#installation)
 - [Improvements](#improvements)
 
@@ -16,7 +17,11 @@ To view the main page for the project which includes all the project's component
 
 ## Capabilities:
 
-The iOS app pulls from FireBase storage and formats the data to be viewed on an app made for the iPhone 8. A live camera feed is displayed in a webView on the app's home screen using a link from the Firebase storage. The app also has two buttons on the home screen which take you to see the photos from the Firebase storage or the 3-second videos. The "photos" button presents you with a vertical scroll-view of photos in a 3-column format and the list is populated with photos moving to the right. The "videos" button presents you with a vertical scroll-view list with the date the videos recorded and each item in the list is pressable. The list of videos is populated with the newest video appearing at the top of the list. Once a video date is pressed from the list, it opens the video player view which would allow the user to watch the 3-second video.
+The iOS app pulls from FireBase storage and formats the data to be viewed on an app made for the iPhone 8. All of the data displayed on the app comes from the Firebase cloud meaning no data is stored on the app and as such the app runs quickly and has low storage costs. A live camera feed is displayed in a webView on the app's home screen using a link from the Firebase storage. The app also has two buttons on the home screen which take you to see the photos from the Firebase storage or the 3-second videos. The "photos" button presents you with a vertical scroll-view of photos in a 3-column format and the list is populated with photos moving to the right. The "videos" button presents you with a vertical scroll-view list with the date the videos recorded and each item in the list is pressable. The list of videos is populated with the newest video appearing at the top of the list. Once a video date is pressed from the list, it opens the video player view which would allow the user to watch the 3-second video.
+
+## Video Demo:
+
+A video demonstrating the app's function and format can be seen here: [iOS App Demo](https://youtube.com/shorts/165S-_A97tA?feature=share). It first shows the live stream by clicking the play button on the home screen, then the photos from the Firebase cloud, and finally the list of clips from the cloud which once selected takes you to a video player.
 
 ## Installation:
 
