@@ -12,7 +12,7 @@ Da Bell is a custom Ring Doorbell alternative that is low in cost and provides s
 
 ## Main Project Page:
 
-To view the GitHub of the project overview which includes all the project's components follow this link: [Main Project Page](https://github.com/Amark18/Da-Bell).
+To view the main page for the project which includes all the project's components follow this link: [Main Project Page](https://github.com/Amark18/Da-Bell).
 
 ## Capabilities:
 
