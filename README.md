@@ -37,15 +37,18 @@ A video demonstrating the app's function and format can be seen here: [iOS App D
 ```
 
 ##### 2. Editing the Code
-- To change how the app looks you will edit the code from ContentView.swift
+- To change how the app looks you will edit the code from ContentView.swift.
 - The app is formatted using a Zstack view and as such objects will have different layers be aware when changing or adding new objects.
-- To change how the app takes in the data from the Firebase storage you will need to edit StorageManager.swift and ContentView.swift
+- To change how the app takes in the data from the Firebase storage you will need to edit StorageManager.swift and ContentView.swift.
+
 
 ##### 3. Updating the iOS and Device Simulator
 # To change the device and iOS version follow these steps:
 - File > Open Simulator > iOS [current version] > Select Device
 
+
 ##### 4. Running the App on Your Desired Device.
+- To run the app on an iOS device follow these steps:
 ```shell
 # Under the app's general settings on XCode make sure the "Signing" portion is filled out and has a working certificate.
 # Connect your desired device to your computer running XCode via a USB or other cable.
@@ -55,7 +58,7 @@ A video demonstrating the app's function and format can be seen here: [iOS App D
 # Select the device you have connected to the computer.
 # Run the program and it should automatically install the app to the device.
 ```
-  
+
 ## Improvements:
 
 Due to time constraints the app was only formatted for the iPhone 8 and had some functions of the app hard coded to display the functionality of the Firebase storage. I had to learn to use Swift, XCode, Firebase, and a Mac computer in the time span of a few weeks and as such there are many ways in which the app can be improved. 
