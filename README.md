@@ -45,10 +45,13 @@ A video demonstrating the app's function and format can be seen here: [iOS App D
 
 ##### 3. Updating the iOS and Device Simulator
 - To change the device and iOS version follow these steps:
-- File > Open Simulator > iOS [current version] > Select Device
+```shell
+1. Open XCode and follow the steps below.
+2. File > Open Simulator > iOS [current version] > Select Device
+```
 
 
-##### 4. Running on Your Device
+##### 4. Running the App on Your Desired Device
 - To run the app on an iOS device follow these steps:
 ```shell
 1. Under the app's general settings on XCode make sure the "Signing" portion is filled out and has a working certificate.
