@@ -25,9 +25,10 @@ A video demonstrating the app's function and format can be seen here: [iOS App D
 
 ## Installation:
 
-#### Device Requirements:
+#### Requirements:
 - Must have an Apple Computer or device with the ability to run XCode.
-- The Da Bell app only works on iOS 16.1 and would need to be updated to run on newer versions, but this is a simple fix in XCode.
+- Must have an AppleID or be part of the Apple Developer Program.
+- Warning: The current app only runs on iOS 16.1 and will need to be updated which I provide a tutorial for below.
 
 ##### 1. Getting started with XCode
 ```shell
@@ -47,16 +48,16 @@ A video demonstrating the app's function and format can be seen here: [iOS App D
 - File > Open Simulator > iOS [current version] > Select Device
 
 
-##### 4. Running the App on Your Desired Device.
+##### 4. Running on Your Device
 - To run the app on an iOS device follow these steps:
 ```shell
-# Under the app's general settings on XCode make sure the "Signing" portion is filled out and has a working certificate.
-# Connect your desired device to your computer running XCode via a USB or other cable.
-# In XCode hit the Window button at the top, then select Devices and Simulators.
-# You should be prompted on your device to trust the computer, hit trust.
-# After it processes for a bit, go to where you select the device to simulate.
-# Select the device you have connected to the computer.
-# Run the program and it should automatically install the app to the device.
+1. Under the app's general settings on XCode make sure the "Signing" portion is filled out and has a working certificate.
+2. Connect your desired device to your computer running XCode via a USB or other cable.
+3. In XCode hit the Window button at the top, then select Devices and Simulators.
+4. You should be prompted on your device to trust the computer, hit trust.
+5. After it processes for a bit, go to where you select the device to simulate.
+6. Select the device you have connected to the computer.
+7. Run the program and it should automatically install the app to the device.
 ```
 
 ## Improvements:
